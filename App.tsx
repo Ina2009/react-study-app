@@ -4,7 +4,9 @@ import './style.css';
 const PersonList = ({ persons }) => (
   <div>
     {persons.map((person) => (
-      <div>{person.name}</div>
+      <div>
+        {person.name} {person.surname}
+      </div>
     ))}
   </div>
 );
@@ -24,6 +26,11 @@ export const App = () => {
     {
       name: 'Vasile',
       surname: 'Șchiopul',
+      age: '20',
+    },
+    {
+      name: 'Andrei',
+      surname: 'Lumînarul',
       age: '20',
     },
   ];
