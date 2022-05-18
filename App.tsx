@@ -12,6 +12,7 @@ const PersonList = ({ persons }) => (
 );
 
 export const App = () => {
+  const [selectedPerson, setselectedPerson] = React.useState();
   const persons = [
     {
       name: 'Ina',
@@ -38,6 +39,10 @@ export const App = () => {
   return (
     <div>
       <PersonList persons={persons} />
+      <div>
+        <h4>Clicked Person</h4>
+        <p onClick={selectedPerson} ></p>
+      </div>
     </div>
   );
 };
