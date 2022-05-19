@@ -1,18 +1,23 @@
 import * as React from 'react';
 import './style.css';
 
-const PersonList = ({ persons }) => (
+const PersonList = ({ persons, setSelectedPerson }) => (
   <div>
     {persons.map((person) => (
-      <div>
+      <div onClick={() => setSelectedPerson(person)}>
         {person.name} {person.surname}
       </div>
     ))}
   </div>
 );
 
+const SelectedPerson = ({ selectedPerson }) => (
+  <div>{selectedPerson?.name || 'no person selected'}</div>
+);
+
 export const App = () => {
-  const [selectedPerson, setselectedPerson] = React.useState();
+  const [selectedPerson, setSelectedPerson] = React.useState(null);
+
   const persons = [
     {
       name: 'Ina',
@@ -38,11 +43,8 @@ export const App = () => {
 
   return (
     <div>
-      <PersonList persons={persons} />
-      <div>
-        <h4>Clicked Person</h4>
-        <p onClick={selectedPerson} ></p>
-      </div>
+      <SelectedPerson selectedPerson={selectedPerson} />
+      <PersonList persons={persons} setSelectedPerson={setSelectedPerson} />
     </div>
   );
 };
