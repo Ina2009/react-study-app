@@ -1,10 +1,15 @@
 import * as React from 'react';
-import './style.css';
+
+const personStyle: React.CSSProperties = {
+  fontWeight: 'bold',
+  fontSize: 20,
+  
+};
 
 const PersonList = ({ persons, setSelectedPerson }) => (
   <div>
     {persons.map((person) => (
-      <div onClick={() => setSelectedPerson(person)}>
+      <div style={personStyle} onClick={() => setSelectedPerson(person)}>
         {person.name} {person.surname}
       </div>
     ))}
