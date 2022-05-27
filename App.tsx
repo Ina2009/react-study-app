@@ -1,29 +1,64 @@
 import * as React from 'react';
 
-const personStyle: React.CSSProperties = {
-  fontWeight: 'bold',
-  fontSize: 20,
-  
+type Person = {
+  name: string;
+  surname: string;
+  age: string;
 };
 
-const PersonList = ({ persons, setSelectedPerson }) => (
+const personStyle: React.CSSProperties = {
+  fontWeight: 'bold',
+  fontSize: 15,
+  marginBottom: 4,
+};
+const containerStyle: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: 24,
+};
+
+const PersonList = ({
+  persons,
+  setSelectedPersonList,
+}: {
+  persons: Person[];
+  setSelectedPersonList: React.Dispatch<React.SetStateAction<Person[]>>;
+}) => (
   <div>
     {persons.map((person) => (
-      <div style={personStyle} onClick={() => setSelectedPerson(person)}>
+      <div
+        onClick={() =>
+          setSelectedPersonList((selectedPersonList) => [
+            ...selectedPersonList,
+            person,
+          ])
+        }
+      >
         {person.name} {person.surname}
       </div>
     ))}
   </div>
 );
 
-const SelectedPerson = ({ selectedPerson }) => (
-  <div>{selectedPerson?.name || 'no person selected'}</div>
+// PersonList({
+//   persons: [],
+//   setSelectedPerson: undefined as unknown as React.Dispatch<
+//     React.SetStateAction<Person>
+//   >,
+// });
+
+const SelectedPerson = ({ selectedPersonList }) => (
+  <div style={personStyle}>
+    {JSON.stringify(selectedPersonList) || 'No person selected'}
+  </div>
 );
 
 export const App = () => {
-  const [selectedPerson, setSelectedPerson] = React.useState(null);
+  const [selectedPersonList, setSelectedPersonList] = React.useState<Person[]>(
+    []
+  );
 
-  const persons = [
+  const persons: Person[] = [
     {
       name: 'Ina',
       surname: 'Croitoru',
@@ -47,9 +82,12 @@ export const App = () => {
   ];
 
   return (
-    <div>
-      <SelectedPerson selectedPerson={selectedPerson} />
-      <PersonList persons={persons} setSelectedPerson={setSelectedPerson} />
+    <div style={containerStyle}>
+      <PersonList
+        persons={persons}
+        setSelectedPersonList={setSelectedPersonList}
+      />
+      <SelectedPerson selectedPersonList={selectedPersonList} />
     </div>
   );
 };
