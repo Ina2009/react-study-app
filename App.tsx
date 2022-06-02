@@ -40,16 +40,12 @@ const PersonList = ({
   </div>
 );
 
-// PersonList({
-//   persons: [],
-//   setSelectedPerson: undefined as unknown as React.Dispatch<
-//     React.SetStateAction<Person>
-//   >,
-// });
+
 
 const SelectedPerson = ({ selectedPersonList }) => (
   <div style={personStyle}>
-    {JSON.stringify(selectedPersonList) || 'No person selected'}
+    {selectedPersonList.map((person)=><div>{person.name} {person.surname}</div>
+  )}
   </div>
 );
 
