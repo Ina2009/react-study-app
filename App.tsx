@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 type Person = {
+  id: string;
   name: string;
   surname: string;
   age: string;
@@ -40,12 +41,34 @@ const PersonList = ({
   </div>
 );
 
+type SelectedPersonsProps = {
+  selectedPersonList: Person[];
+  setSelectedPersonList: React.Dispatch<React.SetStateAction<Person[]>>;
+};
 
-
-const SelectedPerson = ({ selectedPersonList }) => (
+const SelectedPersons = ({
+  selectedPersonList,
+  setSelectedPersonList,
+}: SelectedPersonsProps) => (
   <div style={personStyle}>
-    {selectedPersonList.map((person)=><div>{person.name} {person.surname}</div>
-  )}
+    {selectedPersonList.map((person) => (
+      <div>
+        {person.name} {person.surname}
+        <button
+          onClick={
+            () =>
+              setSelectedPersonList((selectedPersonList) => {
+                // remove the current person from the array
+                return selectedPersonList
+                
+              })
+          
+          }
+        >
+          Delete
+        </button>
+      </div>
+    ))}
   </div>
 );
 
@@ -56,21 +79,25 @@ export const App = () => {
 
   const persons: Person[] = [
     {
+      id: 'a',
       name: 'Ina',
       surname: 'Croitoru',
       age: '21',
     },
     {
+      id: 'b',
       name: 'Carina',
       surname: 'Malina',
       age: '21',
     },
     {
+      id: 'c',
       name: 'Vasile',
       surname: 'Șchiopul',
       age: '20',
     },
     {
+      id: 'd',
       name: 'Andrei',
       surname: 'Lumînarul',
       age: '20',
@@ -83,7 +110,10 @@ export const App = () => {
         persons={persons}
         setSelectedPersonList={setSelectedPersonList}
       />
-      <SelectedPerson selectedPersonList={selectedPersonList} />
+      <SelectedPersons
+        selectedPersonList={selectedPersonList}
+        setSelectedPersonList={setSelectedPersonList}
+      />
     </div>
   );
 };
