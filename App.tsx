@@ -51,19 +51,18 @@ const SelectedPersons = ({
   setSelectedPersonList,
 }: SelectedPersonsProps) => (
   <div style={personStyle}>
-    {selectedPersonList.map((person) => (
+    {selectedPersonList.map((person, i) => (
       <div>
         {person.name} {person.surname}
         <button
-          onClick={
-            () =>
-              setSelectedPersonList((selectedPersonList) => {
-                // remove the current person from the array
-                return selectedPersonList
-                
-              })
-          
-          }
+          onClick={() => {
+            console.log('delete person button clicked');
+            setSelectedPersonList((selectedPersonList) => {
+              console.log('person deleted');
+              selectedPersonList.splice(i, 1);
+              return [...selectedPersonList];
+            });
+          }}
         >
           Delete
         </button>
