@@ -59,8 +59,12 @@ const SelectedPersons = ({
             console.log('delete person button clicked');
             setSelectedPersonList((selectedPersonList) => {
               console.log('person deleted');
-              selectedPersonList.splice(i, 1);
-              return [...selectedPersonList];
+              const firstHalf = selectedPersonList.slice(0, i);
+              const secondHalf = selectedPersonList.slice(
+                i + 1,
+                selectedPersonList.length
+              );
+              return [...firstHalf, ...secondHalf];
             });
           }}
         >
@@ -99,6 +103,18 @@ export const App = () => {
       id: 'd',
       name: 'Andrei',
       surname: 'Lumînarul',
+      age: '20',
+    },
+    {
+      id: 'e',
+      name: 'Ion',
+      surname: 'Parau',
+      age: '20',
+    },
+    {
+      id: 'f',
+      name: 'Olya',
+      surname: 'Moraru',
       age: '20',
     },
   ];
